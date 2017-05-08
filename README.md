@@ -8,18 +8,18 @@ Seleccionar un estado.
 Seleccionar un año.
 Ordenar los datos (alfabéticamente | ascendente | descendente).
 
-This project was generated with the [Angular Full-Stack Generator](https://github.com/DaftMonk/generator-angular-fullstack) version 4.2.0.
+##This project was generated with the [Angular Full-Stack Generator](https://github.com/DaftMonk/generator-angular-fullstack) version 4.2.0.
 
-## Getting Started
+### Getting Started
 
-### Prerequisites
+#### Prerequisites
 
 - [Git](https://git-scm.com/)
 - [Node.js and npm](nodejs.org) Node >= 4.x.x, npm >= 2.x.x
 - [Gulp](http://gulpjs.com/) (`npm install --global gulp`)
 - [MongoDB](https://www.mongodb.org/) - Keep a running daemon with `mongod`
 
-### Developing
+#### Developing
 
 1. Run `npm install` to install server dependencies.
 
@@ -27,10 +27,10 @@ This project was generated with the [Angular Full-Stack Generator](https://githu
 
 3. Run `gulp serve` to start the development server. It should automatically open the client in your browser when ready.
 
-## Build & development
+### Build & development
 
 Run `gulp build` for building and `gulp serve` for preview.
 
-## Testing
+### Testing
 
 Running `npm test` will run the unit tests with karma.
