@@ -19,12 +19,19 @@ import main from './main/main.component';
 import constants from './app.constants';
 import util from '../components/util/util.module';
 
+//Services
 import idhService from '../services/idhService/idhService.service';
+import d3Service from '../services/d3Service/d3Service.service';
+//Directives
+import barChart from '../components/barChart/barChart.directive';
 
 import './app.scss';
 
 angular.module('idhAngularApp', [ngCookies, ngResource, ngSanitize, uiRouter, uiBootstrap, navbar,
-  footer, main, constants, util, idhService
+  footer, main, constants, util,
+  idhService,
+  d3Service,
+  barChart
 ])
   .config(routeConfig);
 
