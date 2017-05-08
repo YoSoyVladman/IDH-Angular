@@ -4,32 +4,16 @@ import routing from './main.routes';
 
 export class MainController {
 
-  awesomeThings = [];
-  newThing = '';
-
   /*@ngInject*/
-  constructor($http) {
-    this.$http = $http;
+  constructor(idhService) {
+    this.idhService = idhService;
   }
 
   $onInit() {
-    this.$http.get('/api/things')
-      .then(response => {
-        this.awesomeThings = response.data;
-      });
-  }
-
-  addThing() {
-    if(this.newThing) {
-      this.$http.post('/api/things', {
-        name: this.newThing
-      });
-      this.newThing = '';
-    }
-  }
-
-  deleteThing(thing) {
-    this.$http.delete(`/api/things/${thing._id}`);
+    this.datos = 'huevs';
+    console.log(this.idhService);
+    this.estate = this.idhService.getStates();
+    console.log(estate);
   }
 }
 
@@ -37,6 +21,7 @@ export default angular.module('idhAngularApp.main', [uiRouter])
   .config(routing)
   .component('main', {
     template: require('./main.html'),
-    controller: MainController
+    controller: MainController,
+    controllerAs: 'mainCtrl'
   })
   .name;
