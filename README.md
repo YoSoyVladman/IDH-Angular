@@ -1,4 +1,12 @@
-# idh-angular
+# Prueba D3.js - Índice de desarrollo humano
+
+Desplegar una gráfica de barras en la que se muestran los valores del Índice de Desarrollo Humano de los 32 estados de la República Mexicana.
+
+En la parte superior se ubican 3 dropdowns que permiten:
+
+Seleccionar un estado.
+Seleccionar un año.
+Ordenar los datos (alfabéticamente | ascendente | descendente).
 
 This project was generated with the [Angular Full-Stack Generator](https://github.com/DaftMonk/generator-angular-fullstack) version 4.2.0.
 
