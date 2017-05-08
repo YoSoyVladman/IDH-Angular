@@ -1,36 +1,11 @@
-# Prueba D3.js - Índice de desarrollo humano
+# Test D3.js - Human Development Index
 
-Desplegar una gráfica de barras en la que se muestran los valores del Índice de Desarrollo Humano de los 32 estados de la República Mexicana.
+Display a bar graph showing the values of the Human Development Index of the 32 states of the Mexican Republic.
 
-En la parte superior se ubican 3 dropdowns que permiten:
+At the top are 3 dropdowns that allow:
 
-Seleccionar un estado.
-Seleccionar un año.
-Ordenar los datos (alfabéticamente | ascendente | descendente).
+Select a state.
+Select a year.
+Sort the data (alphabetically | ascending | descending).
 
 ## This project was generated with the [Angular Full-Stack Generator](https://github.com/DaftMonk/generator-angular-fullstack) version 4.2.0.
-
-### Getting Started
-
-#### Prerequisites
-
-- [Git](https://git-scm.com/)
-- [Node.js and npm](nodejs.org) Node >= 4.x.x, npm >= 2.x.x
-- [Gulp](http://gulpjs.com/) (`npm install --global gulp`)
-- [MongoDB](https://www.mongodb.org/) - Keep a running daemon with `mongod`
-
-#### Developing
-
-1. Run `npm install` to install server dependencies.
-
-2. Run `mongod` in a separate shell to keep an instance of the MongoDB Daemon running
-
-3. Run `gulp serve` to start the development server. It should automatically open the client in your browser when ready.
-
-### Build & development
-
-Run `gulp build` for building and `gulp serve` for preview.
-
-### Testing
-
-Running `npm test` will run the unit tests with karma.
