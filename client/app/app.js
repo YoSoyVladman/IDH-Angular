@@ -19,10 +19,12 @@ import main from './main/main.component';
 import constants from './app.constants';
 import util from '../components/util/util.module';
 
+import idhService from '../services/idhService/idhService.service';
+
 import './app.scss';
 
 angular.module('idhAngularApp', [ngCookies, ngResource, ngSanitize, uiRouter, uiBootstrap, navbar,
-  footer, main, constants, util
+  footer, main, constants, util, idhService
 ])
   .config(routeConfig);
 
