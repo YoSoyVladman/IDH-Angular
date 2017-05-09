@@ -7,11 +7,12 @@ export class MainController {
   /*@ngInject*/
   constructor(idhService) {
     this.idhService = idhService;
+    this.year = '1990';
   }
 
   $onInit() {
     this.states = this.idhService.getStates();
-    console.log('estates',this.states);
+    console.log(this.states);
   }
 }
 
