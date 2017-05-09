@@ -10,9 +10,8 @@ export class MainController {
   }
 
   $onInit() {
-    console.log(this.idhService);
-    this.estate = this.idhService.getStates();
-    console.log(this.estate);
+    this.states = this.idhService.getStates();
+    console.log('estates',this.states);
   }
 }
 
