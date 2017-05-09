@@ -1,2 +1,41 @@
 
-<bar-chart data="mainCtrl.states" selected-state="Mecxio" sort-by="asc" year="2017" bar-height="20" bar-padding="5"></bar-chart>
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+    <h1>Indice Desarrollo Humano</h1>
+    <div class="col-md-4">
+      <label>Estado</label>
+      <select class="form-control" ng-model="mainCtrl.selectedState">
+        <option ng-repeat="option in mainCtrl.states" value="{{option.name}}">{{option.name}}</option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label>Años</label>
+      <select class="form-control" ng-model="mainCtrl.year">
+        <option ng-repeat="option in mainCtrl.states[0].years" value="{{option.year}}">{{option.year}}</option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label>Ordenamiento</label>
+      <select class="form-control" ng-model="mainCtrl.year">
+        <option>1990</option>
+        <option>1991</option>
+        <option>1992</option>
+        <option>1993</option>
+        <option>1994</option>
+        <option>1995</option>
+      </select>
+    </div>
+    <h2>{{ mainCtrl.year }}</h2>
+  </div>
+
+  <div class="col-md-10 col-md-offset-1">
+    <bar-chart
+      data="mainCtrl.states"
+      selected-state="Mecxio"
+      sort-by="asc"
+      year="mainCtrl.year"
+      bar-height="20"
+      bar-padding="5">
+    </bar-chart>
+  </div>
+</div>
