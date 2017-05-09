@@ -20,9 +20,9 @@ export default angular.module('idhAngularApp.barChart', [])
           var margin = parseInt(attrs.margin) || 20,
           barHeight = parseInt(attrs.barHeight) || 20,
           barPadding = parseInt(attrs.barPadding) || 5;
-
-          var year = '1990'
-          var selectYear = dataByYear(scope.data, year);
+          // console.log(scope.year);
+          // var year = '1990'
+          var selectYear = dataByYear(scope.data, scope.year);
 
           var svg = d3.select(element[0])
             .append('svg')
@@ -35,10 +35,10 @@ export default angular.module('idhAngularApp.barChart', [])
 
 
           // Watch for resize event
-          scope.$watch(function() {
-            return angular.element($window)[0].innerWidth;
-          }, function() {
+          scope.$watch(function(e) {
+            selectYear = dataByYear(scope.data, scope.year);
             scope.render(selectYear);
+            return angular.element($window)[0].innerWidth;
           });
 
           scope.render = function(data) {
@@ -98,13 +98,9 @@ export default angular.module('idhAngularApp.barChart', [])
 
         function dataByYear(data,year){
           var dataYear = [];
-          console.log(data);
-          console.log(year);
           data.forEach(state => {
-            console.log(state);
             state.years.forEach(element =>{
               if (element.year == year) {
-                console.log(element.year);
                 var obj = {name: state.name, idh: element.idh};
                 dataYear.push(obj);
                 return
