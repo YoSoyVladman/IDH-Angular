@@ -17,10 +17,10 @@ export default angular.module('idhAngularApp.barChart', [])
         d3Service.d3()
         .then(function(d3) {
 
-          var margin = parseInt(attrs.margin) || 20,
+          var margin = parseInt(attrs.margin) || 250,
           barHeight = parseInt(attrs.barHeight) || 20,
           barPadding = parseInt(attrs.barPadding) || 5;
-          // console.log(scope.year);
+          console.log(scope.year);
           // var year = '1990'
           var selectYear = dataByYear(scope.data, scope.year);
 
@@ -36,9 +36,10 @@ export default angular.module('idhAngularApp.barChart', [])
 
           // Watch for resize event
           scope.$watch(function(e) {
-            selectYear = dataByYear(scope.data, scope.year);
+            console.log(e);
+            selectYear = dataByYear(scope.data, e.year);
             scope.render(selectYear);
-            return angular.element($window)[0].innerWidth;
+            // return angular.element($window)[0].innerWidth;
           });
 
           scope.render = function(data) {
@@ -50,16 +51,14 @@ export default angular.module('idhAngularApp.barChart', [])
 
             // setup variables
             var width = d3.select(element[0]).node().offsetWidth - margin,
-                // calculate the height
-                height = scope.data.length * (barHeight + barPadding),
-                // Use the category20() scale function for multicolor support
-                color = d3.scale.category20(),
-                // our xScale
-                xScale = d3.scale.linear()
-                  .domain([0, d3.max(data, function(d) {
-                    return d.idh;
-                  })])
-                  .range([0, width]);
+            // calculate the height
+            height = scope.data.length * (barHeight + barPadding),
+            // our xScale
+            xScale = d3.scale.linear()
+            .domain([0, d3.max(data, function(d) {
+              return d.idh;
+            })])
+            .range([0, width]);
 
             // set the height based on the calculations above
             svg.attr('height', height);
@@ -74,26 +73,26 @@ export default angular.module('idhAngularApp.barChart', [])
                 .attr('y', function(d,i) {
                   return i * (barHeight + barPadding);
                 })
-                .attr('fill', function(d) { return color(d.idh); })
+                .attr('fill', d3.rgb(48,144,168))
                 .transition()
-                  .duration(1000)
+                  .duration(500)
                   .attr('width', function(d) {
                     return xScale(d.idh);
                   });
-            svg.selectAll('text')
-                  .data(data)
-                  .enter()
-                    .append('text')
-                    .attr('fill', '#fff')
-                    .attr('y', function(d,i) {
-                      return i * (barHeight + barPadding) + 15;
-                    })
-                    .attr('x', 15)
-                    .text(function(d) {
-                      return d.name;
-                    });
-           }
 
+            // add Name to each Bar
+            svg.selectAll('text')
+            .data(data).enter()
+            .append('text')
+            .attr('fill', d3.rgb(0,0,0))
+            .attr('y', function(d,i) {
+              return i * (barHeight + barPadding) + 15;
+            })
+            .attr('x', 0)
+            .text(function(d) {
+              return d.name;
+            });
+          }
         });
 
         function dataByYear(data,year){

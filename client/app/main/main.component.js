@@ -12,7 +12,6 @@ export class MainController {
 
   $onInit() {
     this.states = this.idhService.getStates();
-    console.log(this.states);
   }
 }
 
