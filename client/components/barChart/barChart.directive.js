@@ -9,7 +9,7 @@ export default angular.module('idhAngularApp.barChart', [])
       scope: {
         data: '=',
         selectedState: '@',
-        sortBy: '@',
+        sortBy: '=',
         year: '='
       },
 
@@ -21,7 +21,7 @@ export default angular.module('idhAngularApp.barChart', [])
             var barPadding = parseInt(attrs.barPadding, 10) || 5;
             console.log(scope.year);
             // var year = '1990'
-            var selectYear = dataByYear(scope.data, scope.year);
+            // var selectYear = dataByYear(scope.data, scope.year);
 
             var svg = d3.select(element[0])
               .append('svg')
@@ -36,9 +36,9 @@ export default angular.module('idhAngularApp.barChart', [])
             // Watch for resize event
             scope.$watch(function(e) {
               console.log(e);
-              selectYear = dataByYear(scope.data, e.year);
-              console.log(selectYear);
-
+              var selectYear = dataByYear(scope.data, e.year);
+              var orderBy = orderData(selectYear, scope.sortBy);
+              console.log('a', orderBy);
               scope.render(selectYear);
               // return angular.element($window)[0].innerWidth;
             });
@@ -113,6 +113,22 @@ export default angular.module('idhAngularApp.barChart', [])
             });
           });
           return dataYear;
+        }
+
+        function orderData(data, order) {
+          if(order == 1) {
+            var ascending = data.sort((a, b) => Number(a.idh) - Number(b.idh));
+            console.log('ascending', ascending);
+            return ascending;
+          }
+          else if(order == 2) {
+            var descending = data.sort((a, b) => Number(b.idh) - Number(a.idh));
+            console.log('ascending', descending);
+            return descending;
+          }
+          else {
+            return data;
+          }
         }
       }
     };

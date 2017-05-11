@@ -8,6 +8,7 @@ export class MainController {
   constructor(idhService) {
     this.idhService = idhService;
     this.year = '1990';
+    this.order = '0';
   }
 
   $onInit() {

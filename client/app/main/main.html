@@ -16,13 +16,10 @@
     </div>
     <div class="col-md-4">
       <label>Ordenamiento</label>
-      <select class="form-control" ng-model="mainCtrl.year">
-        <option>1990</option>
-        <option>1991</option>
-        <option>1992</option>
-        <option>1993</option>
-        <option>1994</option>
-        <option>1995</option>
+      <select class="form-control" ng-model="mainCtrl.order">
+        <option value="0">Alfabeticamente</option>
+        <option value="1">Ascendente</option>
+        <option value="2">Descendente</option>
       </select>
     </div>
     <h2>{{ mainCtrl.year }}</h2>
@@ -32,7 +29,7 @@
     <bar-chart
       data="mainCtrl.states"
       selected-state="Mecxio"
-      sort-by="asc"
+      sort-by="mainCtrl.order"
       year="mainCtrl.year"
       bar-height="20"
       bar-padding="20">
