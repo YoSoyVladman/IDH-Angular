@@ -8,7 +8,7 @@ export default angular.module('idhAngularApp.barChart', [])
       restrict: 'EA',
       scope: {
         data: '=',
-        selectedState: '@',
+        selectedState: '=',
         sortBy: '=',
         year: '='
       },
@@ -19,9 +19,9 @@ export default angular.module('idhAngularApp.barChart', [])
             var margin = parseInt(attrs.margin, 10) || 250;
             var barHeight = parseInt(attrs.barHeight, 10) || 20;
             var barPadding = parseInt(attrs.barPadding, 10) || 5;
-            console.log(scope.year);
-            // var year = '1990'
-            // var selectYear = dataByYear(scope.data, scope.year);
+
+            var selectYear = dataByYear(scope.data, scope.year);
+            var orderBy = orderData(selectYear, scope.sortBy);
 
             var svg = d3.select(element[0])
               .append('svg')
@@ -32,18 +32,41 @@ export default angular.module('idhAngularApp.barChart', [])
               scope.$apply();
             };
 
+            scope.$watch(function(){
+                return angular.element(window)[0].innerWidth;
+              }, function(){
+                selectYear = dataByYear(scope.data, scope.year);
+                orderBy = orderData(selectYear, scope.sortBy);
+                return scope.render(orderBy);
+              }
+            );
 
-            // Watch for resize event
-            scope.$watch(function(e) {
-              console.log(e);
-              var selectYear = dataByYear(scope.data, e.year);
-              var orderBy = orderData(selectYear, scope.sortBy);
-              console.log('a', orderBy);
-              scope.render(selectYear);
-              // return angular.element($window)[0].innerWidth;
-            });
+            // watch for year changes and re-render
+            scope.$watch('year', function(newVal) {
+              selectYear = dataByYear(scope.data, newVal);
+              orderBy = orderData(selectYear, scope.sortBy);
+              return scope.render(orderBy);
+            }, true);
 
+            // watch for sortBy changes and re-render
+            scope.$watch('sortBy', function(newVal) {
+              selectYear = dataByYear(scope.data, scope.year);
+              orderBy = orderData(selectYear, newVal);
+              return scope.render(orderBy);
+            }, true);
+
+            // watch for selectedState changes and re-render
+            scope.$watch('selectedState', function(newVal) {
+              selectYear = dataByYear(scope.data, scope.year);
+              orderBy = orderData(selectYear, scope.sortBy);
+              return scope.render(orderBy);
+            }, true);
+
+            // define render function
             scope.render = function(data) {
+
+              var windowWidth = angular.element(window)[0].innerWidth;
+              console.log(windowWidth);
               // remove all previous items before render
               svg.selectAll('*').remove();
 
@@ -75,7 +98,14 @@ export default angular.module('idhAngularApp.barChart', [])
                 .attr('y', function(d, i) {
                   return i * (barHeight + barPadding);
                 })
-                .attr('fill', d3.rgb(48, 144, 168))
+                .attr('fill', function(d,i){
+                  if (d.name == scope.selectedState) {
+                    return d3.rgb(240,96,24)
+                  }
+                  else {
+                    return d3.rgb(48, 144, 168)
+                  }
+                })
                 .transition()
                 .duration(500)
                 .attr('width', function(d) {
@@ -105,6 +135,7 @@ export default angular.module('idhAngularApp.barChart', [])
               if(ele.year == year) {
                 var obj = {
                   name: state.name,
+                  abbreviation: state.abbreviation,
                   idh: ele.idh
                 };
                 dataYear.push(obj);
@@ -118,12 +149,10 @@ export default angular.module('idhAngularApp.barChart', [])
         function orderData(data, order) {
           if(order == 1) {
             var ascending = data.sort((a, b) => Number(a.idh) - Number(b.idh));
-            console.log('ascending', ascending);
             return ascending;
           }
           else if(order == 2) {
             var descending = data.sort((a, b) => Number(b.idh) - Number(a.idh));
-            console.log('ascending', descending);
             return descending;
           }
           else {
